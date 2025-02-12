@@ -40,6 +40,11 @@ const ListItem = styled.li`
   background-color: ${(props) => (props.index % 2 === 0 ? "#5C6090" : "#5C8490")};
   color: white;
   border-radius: 5px;
+  transition: background-color 0.2s;
+  
+  &:hover{
+    background-color:rgb(63, 155, 60);
+  }
 `;
 
 export default function DynamicList() {
