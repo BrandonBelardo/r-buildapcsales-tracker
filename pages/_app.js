@@ -23,6 +23,7 @@ export default function App({ Component, pageProps }) {
           <link rel="manifest" href="/favicon_package/site.webmanifest"/>
           <meta name="msapplication-TileColor" content="#da532c"/>
           <meta name="theme-color" content="#ffffff"/>
+      <Component {... pageProps} ></Component>
         </Head>
         <GlobalStyle />
 
