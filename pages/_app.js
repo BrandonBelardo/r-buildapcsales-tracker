@@ -1,5 +1,4 @@
 import Head from 'next/head' //use instead of head
-import { StateContext } from "@/context/StateContext"
 import { createGlobalStyle } from 'styled-components'
 
 export const GlobalStyle = createGlobalStyle`
@@ -25,12 +24,8 @@ export default function App({ Component, pageProps }) {
           <meta name="msapplication-TileColor" content="#da532c"/>
           <meta name="theme-color" content="#ffffff"/>
         </Head>
-
         <GlobalStyle />
 
-      <StateContext>
-        <Component {...pageProps} />
-      </StateContext>
     </>
   )
 }
