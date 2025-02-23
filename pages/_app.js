@@ -6,7 +6,15 @@ const GlobalStyle = createGlobalStyle`
         color: white;
         background-color:rgb(50, 43, 56);
         font-family: "Nunito Sans", serif;
+        margin: 8px 0px 0px;
     }
+    
+    a {
+      font-style: inherit;
+      color: inherit;
+      text-decoration: none;
+      font-family: inherit;
+    }   
 `;
 
 
@@ -24,9 +32,7 @@ export default function App({ Component, pageProps }) {
             <meta name="msapplication-TileColor" content="#da532c"/>
             <meta name="theme-color" content="#ffffff"/>
             <link rel="preconnect" href="https://fonts.googleapis.com"/>
-            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-            <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet"/>
-      </Head>
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/> <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet"/> </Head>
       <GlobalStyle/>
       <Component {... pageProps} ></Component>
     </>

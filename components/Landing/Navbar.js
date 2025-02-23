@@ -7,7 +7,7 @@ export default function Navbar() {
                 <NavLogo src ="https://cdn1.iconfinder.com/data/icons/computer-components-6/32/cpu_processor_computer_chip-512.png"/>
             </NavLogoLink>
             <NavLinkContainer>  
-                <NavLink href=  "#">Log in</NavLink>
+                <NavLink href="#">Log in</NavLink>
                 <NavLink href="#">Sign up</NavLink>
             </NavLinkContainer>
         </NavContainer>
