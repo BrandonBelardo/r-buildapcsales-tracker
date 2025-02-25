@@ -28,7 +28,7 @@ export default function AuthForm({ title, onSubmit, buttonText, extraFields = []
 const CardContainer = styled.div`
     background-color: #201d24;
     margin-top: 10vh;
-    width: 25vw;
+    width: 25rem;
     max-height: fit-content;
     border-radius: 7px;
     box-shadow: 0px 3px 10px -2px black;
@@ -51,7 +51,7 @@ const CardLabel = styled.label`
 
 const CardInput = styled.input`
     display: block;
-    width: 390px;
+    width: 19rem;
     margin: 10px 25px 0px;
     padding: 16px;
     border-radius: 15px;
@@ -78,7 +78,7 @@ const FormSubmit = styled.button`
     font-size: 15px;
     border-color: rgb(81, 138, 227);
     border-radius: 0.2rem;
-    width: 425px;
+    width: 21.5rem;
     color: inherit;
     transition: background-color 0.2s;
 
