@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Link from "next/link";
 
 export default function Navbar() {
     return(
@@ -7,8 +8,9 @@ export default function Navbar() {
                 <NavLogo src ="https://cdn1.iconfinder.com/data/icons/computer-components-6/32/cpu_processor_computer_chip-512.png"/>
             </NavLogoLink>
             <NavLinkContainer>  
-                <NavLink href="#">Log in</NavLink>
-                <NavLink href="#">Sign up</NavLink>
+                <NavLink href="/dashboard">Dashboard</NavLink>
+                <NavLink href="/account/login">Log in</NavLink>
+                <NavLink href="/account/signup">Sign up</NavLink>
             </NavLinkContainer>
         </NavContainer>
     );
@@ -32,7 +34,7 @@ const NavContainer = styled.div`
 `;
 
 
-const NavLogoLink = styled.a``;
+const NavLogoLink = styled(Link)``;
 
 const NavLogo = styled.img`
     width: 4rem;
@@ -47,7 +49,7 @@ const NavLinkContainer = styled.nav`
     margin: 1rem;
 `;
 
-const NavLink = styled.a`
+const NavLink = styled(Link)`
     margin: 1.5rem;
     color: inherit;
     font-family: inherit;

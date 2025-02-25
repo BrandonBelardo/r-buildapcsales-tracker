@@ -1,39 +1,29 @@
 import Navbar from "@/components/Landing/Navbar";
+import { PageContainer } from "@/components/Landing/PageContainer";
 import styled from "styled-components";
 import Link from "next/link";
 
-export default function Home() { 
-    return(
+export default function Home() {
+    return (
         <>
-            <Navbar/>
+            <Navbar />
             <PageContainer>
                 <LandingTextContainer>
                     <MainHeader>
                         Build Your Next PC For Less
                     </MainHeader>
                     <MainSubHeader>
-                        Configure notifications with Telegram to be instantly alerted of new sales.     
+                        Configure notifications with Telegram to be instantly alerted of new sales.
                     </MainSubHeader>
-                    <GetStartedButton href="/">Get Started</GetStartedButton>
+                    <GetStartedButton href="/account/signup">Get Started</GetStartedButton>
                 </LandingTextContainer>
             </PageContainer>
         </>
     );
- }
+}
 
- const PageContainer = styled.div`
-    display: flex;
-    justify-content: center; 
-    text-align: center;
-    min-height: 100vh; 
-    width: 100%;
-    padding: 20px; 
-    background: linear-gradient(0deg, rgb(37, 29, 43), rgb(50, 43, 56));
-    box-sizing: border-box;
 
- `;
-
- const LandingTextContainer = styled.div`
+const LandingTextContainer = styled.div`
     margin-top: 100px;
     max-width: 600px;
     font-weight: 500;
@@ -41,19 +31,19 @@ export default function Home() {
 
  `;
 
- const MainHeader = styled.h1`
+const MainHeader = styled.h1`
     margin: 0px;
     font-size: 3.5rem;
  
  `;
 
- const MainSubHeader = styled.h2`
+const MainSubHeader = styled.h2`
     font-size: 1.5rem;
     font-weight: 200;
     margin: 0.5rem;
  `;
 
- const GetStartedButton = styled(Link)`
+const GetStartedButton = styled(Link)`
     display: inline-block;
     background-color:rgb(81, 138, 227);
     padding: 0.5rem 0.875rem;
