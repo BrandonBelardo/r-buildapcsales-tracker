@@ -19,7 +19,7 @@ export default function AuthForm({ title, onSubmit, buttonText, extraFields = []
                         <CardInput type={field.type} name={field.name} required={field.required} />
                     </FormBlock>
                 ))}
-                <FormSubmit type="submit">{buttonText}</FormSubmit>
+                <FormSubmit type="submit" value={ buttonText }/>
             </CardForm>
         </CardContainer>
     );
@@ -69,7 +69,7 @@ const FormBlock = styled.div`
     margin-bottom: 20px;
 `;
 
-const FormSubmit = styled.button`
+const FormSubmit = styled.input`
     display: block;
     background-color: rgb(81, 138, 227);
     padding: 10px 50px;
