@@ -1,5 +1,6 @@
 import Head from 'next/head' //use instead of head
 import { createGlobalStyle } from 'styled-components'
+import { StateContext } from '@/context/StateContext';
 
 const GlobalStyle = createGlobalStyle`
     body {
@@ -21,7 +22,7 @@ const GlobalStyle = createGlobalStyle`
 
 export default function App({ Component, pageProps }) {
     return (
-        <>
+        <StateContext>
             <Head>
                 <title>MVP Starter</title>
                 <meta name='description' content='Put a description here about your app' />
@@ -36,6 +37,6 @@ export default function App({ Component, pageProps }) {
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /> <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet" /> </Head>
             <GlobalStyle />
             <Component {...pageProps} ></Component>
-        </>
+        </StateContext>
     );
 }
