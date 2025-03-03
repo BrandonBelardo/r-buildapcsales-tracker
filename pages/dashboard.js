@@ -1,16 +1,27 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Navbar from "@/components/Landing/Navbar";
+import { useRouter } from "next/router";
+import { useStateContext } from "@/context/StateContext";
 
 export default function Dashboard() {
+    const router = useRouter();
     const [posts, setPosts] = useState([]);
+    const { user } = useStateContext();
+
+    useEffect(() => {
+        if (!user) {
+            alert("You can only access the dashboard once you have signed in.");
+            router.push('/');
+        }
+    }, []);
 
     useEffect(() => {
         fetch("https://www.reddit.com/r/buildapcsales/new.json")
             .then((res) => res.json())
             .then((data) => setPosts(data.data.children));
     }, []);
-
+    
     return (
         <>
             <Navbar />

@@ -1,19 +1,36 @@
 import styled from "styled-components";
 import Link from "next/link";
+import { useStateContext } from "@/context/StateContext";
+import { logoutUser } from "@/backend/Auth";
 
 export default function Navbar() {
-    return(
-        <NavContainer>
-            <NavLogoLink href="/">
-                <NavLogo src ="https://cdn1.iconfinder.com/data/icons/computer-components-6/32/cpu_processor_computer_chip-512.png"/>
-            </NavLogoLink>
-            <NavLinkContainer>  
-                <NavLink href="/dashboard">Dashboard</NavLink>
-                <NavLink href="/account/login">Log in</NavLink>
-                <NavLink href="/account/signup">Sign up</NavLink>
-            </NavLinkContainer>
-        </NavContainer>
-    );
+    const { user } = useStateContext();
+    if (user){
+        return(
+            <NavContainer>
+                <NavLogoLink href="/">
+                    <NavLogo src ="https://cdn1.iconfinder.com/data/icons/computer-components-6/32/cpu_processor_computer_chip-512.png"/>
+                </NavLogoLink>
+                <NavLinkContainer>  
+                    <NavLink href="/dashboard">Dashboard</NavLink>
+                    <NavLink bold href='/' onClick={ logoutUser }>Sign Out</NavLink>
+                </NavLinkContainer>
+            </NavContainer>
+        );
+    }
+    else {
+        return(
+            <NavContainer>
+                <NavLogoLink href="/">
+                    <NavLogo src ="https://cdn1.iconfinder.com/data/icons/computer-components-6/32/cpu_processor_computer_chip-512.png"/>
+                </NavLogoLink>
+                <NavLinkContainer>  
+                    <NavLink href="/account/login">Log in</NavLink>
+                    <NavLink href="/account/signup">Sign up</NavLink>
+                </NavLinkContainer>
+            </NavContainer>
+        );
+    }
 }
 
 const NavContainer = styled.div`
@@ -54,4 +71,6 @@ const NavLink = styled(Link)`
     color: inherit;
     font-family: inherit;
     text-decoration: none;
+    font-weight: ${(props) => (props.bold ? 700 : 500)};
 `;
+
