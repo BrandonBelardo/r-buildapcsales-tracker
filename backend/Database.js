@@ -23,22 +23,22 @@ export const addUserToFirestore = async (user) => {
     }
 }
 
-export const setUserTelegramID = async (user, telegramID) => {
+export const setUserSetting = async (user, columnName, columnValue) => {
     try {
         if (!user) {
             throw new Error("Provided user is not yet intialized");
         }
         const userRef = doc(db, "users", user.uid);
         await updateDoc(userRef, {
-            telegramID: telegramID
+            [columnName]: columnValue,
         });
     } catch (error) {
-        console.error("Error setting Telegram ID: ", error);
+        console.error(`Error setting ${columnName}: ${error}`);
     }
 
 }
 
-export const getUserTelegramID = async (user) => {
+export const getUserSetting = async (user, columnName) => {
     try {
         if (!user || !user.uid) {
             throw new Error("Provided user is not yet initialized");
@@ -47,13 +47,13 @@ export const getUserTelegramID = async (user) => {
         const userRef = doc(db, "users", user.uid);
         const userSnap = await getDoc(userRef);
 
-        if (userSnap.exists() && userSnap.data().telegramID) {
-            return userSnap.data().telegramID; 
+        if (userSnap.exists() && userSnap.data()[columnName]) {
+            return userSnap.data()[columnName]; 
         } else {
             return ""; 
         }
     } catch (error) {
-        console.error("Error fetching Telegram ID: ", error);
+        console.error(`Error fetching ${columnName}: ${error}`);
         return ""; 
     }
 };
@@ -66,14 +66,14 @@ export const storeLatestPost = async (posts) => {
 
         const latestPost = posts[0].data; 
 
-        const lastPostRef = doc(db, "post_data", "last_post");
-        const lastPostSnap = await getDoc(lastPostRef);
+        const storedLastPostRef = doc(db, "post_data", "last_post");
+        const storedLastPost = await getDoc(storedLastPostRef);
 
-        if (lastPostSnap.exists() && lastPostSnap.data().postID === latestPost.id) {
+        if (storedLastPost.exists() && storedLastPost.data().postID === latestPost.id) {
             return null; 
         }
 
-        await setDoc(lastPostRef, {
+        await setDoc(storedLastPostRef, {
             postID: latestPost.id,
             title: latestPost.title,
             url: `https://reddit.com${latestPost.permalink}`,

@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { useStateContext } from "@/context/StateContext";
 import { storeLatestPost } from "@/backend/Database";
 import Link from "next/link";
+import { notifyUser } from "@/backend/Telegram";
 
 export default function Dashboard() {
     const router = useRouter();
@@ -24,6 +25,7 @@ export default function Dashboard() {
             .then((res) => res.json())
             .then((data) => {
                 setPosts(data.data.children); 
+                notifyUser(user, "hello");
                 storeLatestPost(data.data.children); 
             })
             .catch((error) => console.error("Error fetching Reddit posts:", error));
