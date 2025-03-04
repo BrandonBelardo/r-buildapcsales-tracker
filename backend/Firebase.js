@@ -13,11 +13,12 @@ const firebaseConfig = {
   appId: "1:228769266695:web:ee213c649a2e41c7417ea2"
 };
 
-  
-  
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  export const auth = getAuth(app);
+
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+export const auth = getAuth(app);
+export const db = getFirestore(app);
 
 
 // const firebaseConfig = process.env.NODE_ENV === 'production' ? {

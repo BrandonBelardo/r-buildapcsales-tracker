@@ -23,7 +23,8 @@ export const logoutUser = async () => {
 
 export const signupUser = async (email, password) => {
     try {
-        await createUserWithEmailAndPassword(auth, email, password);
+        const credential = await createUserWithEmailAndPassword(auth, email, password);
+        return credential.user;
     } catch (error) {
         console.error("Signup failed:", error.message);
         throw error;

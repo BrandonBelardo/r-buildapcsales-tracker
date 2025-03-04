@@ -3,6 +3,7 @@ import { PageContainer } from "@/components/Landing/PageContainer";
 import AuthForm from "@/components/Auth/AuthForm";
 import { signupUser } from "@/backend/Auth";
 import { useRouter } from "next/router";
+import { addUserToFirestore } from "@/backend/Database";
 
 export default function SignUp() {
     const router = useRouter();
@@ -17,7 +18,8 @@ export default function SignUp() {
             if (password != confirmPassword){
                 throw new Error("Password doesn't match confirm password")
             }
-            await signupUser(email, password);
+            const user = await signupUser(email, password);
+            await addUserToFirestore(user);
             alert("Signup successful");
             router.push('/dashboard');
         } catch (error){

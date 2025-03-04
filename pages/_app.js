@@ -9,6 +9,7 @@ const GlobalStyle = createGlobalStyle`
         font-family: "Nunito Sans", serif;
         margin: 8px 0px 0px;
         background: linear-gradient(0deg, rgb(37, 29, 43), rgb(50, 43, 56));
+        background-attachment: fixed;
     }
     
     a {

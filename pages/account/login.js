@@ -14,15 +14,15 @@ export default function Login() {
         const email = event.target.email.value;
         const password = event.target.password.value;
 
-        try{
-            if (user){
+        try {
+            if (user) {
                 throw new Error("You are already logged in.");
             }
             await loginUser(email, password);
             alert("Login successful");
             router.push('/dashboard');
-            
-        } catch (error){
+
+        } catch (error) {
             alert("Login failed: " + error.message);
         }
 
