@@ -19,7 +19,7 @@ export default function AuthForm({ title, onSubmit, buttonText, extraFields = []
                         <CardInput type={field.type} name={field.name} required={field.required} />
                     </FormBlock>
                 ))}
-                <FormSubmit type="submit" value={ buttonText }/>
+                <FormSubmit type="submit" value={buttonText} />
             </CardForm>
         </CardContainer>
     );
@@ -80,8 +80,8 @@ const FormSubmit = styled.input`
     border-radius: 0.2rem;
     width: 21.5rem;
     color: inherit;
-    transition: background-color 0.2s;
-
+    transition: background-color 0.2s;    
+    
     &:hover {
         background-color: rgb(67, 111, 182);
     }

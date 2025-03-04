@@ -6,6 +6,7 @@ import { useStateContext } from "@/context/StateContext";
 import { getUserSetting, setUserSetting } from "@/backend/Database";
 import Tooltip from "@/components/Tooltip";
 import { useRouter } from "next/router";
+import { notifyUser } from "@/backend/Telegram";
 
 export default function Notifcations() {
 
@@ -87,7 +88,10 @@ export default function Notifcations() {
             console.error("Error updating notification settings: ", error);
         }
     };
-
+    
+    const testNotification = async () => {
+        notifyUser(user, "If you received this, your Telegram account is properly linked.");
+    };
 
     return (
         <>
@@ -101,12 +105,14 @@ export default function Notifcations() {
                             <CardLabel>
                                 Telegram ID:
                                 <Tooltip>
-                                    In your telegram app, search for the user "RawDataBot" and click on them to start a chat.
-                                    Press the "start" button when you open the chat. Then, copy your Telegram ID from the
-                                    response sent by the bot by clicking on the text.
+                                    This identifies the account to send notifications to. In your telegram app, search 
+                                    for the user "RawDataBot" and click on them to start a chat. Press the "start" 
+                                    button when you open the chat. Then, copy your Telegram ID from the response sent 
+                                    by the bot by clicking on the text.
                                 </Tooltip>
                             </CardLabel>
                             <CardInput value={telegramIDInput} onChange={(e) => setTelegramIDInput(e.target.value)}></CardInput>
+                            <TestButton onClick={testNotification}>Test Notifications</TestButton>
                         </FormBlock>
 
                         <FormBlock>
@@ -211,7 +217,25 @@ const SaveButton = styled.button`
     transition: background-color 0.2s;    
     
     &:hover {
-        background: #1074a3;
+        background-color: rgb(67, 111, 182);
     }
 `;
+
+const TestButton = styled.button`
+    display: block;
+    background-color: rgb(81, 138, 227);
+    padding: 7px;
+    margin: 20px 25px 0px;
+    font-weight: 550;
+    font-size: 14px;
+    border-color: rgb(81, 138, 227);
+    border-radius: 0.2rem;
+    width: 9rem;
+    color: inherit;
+    transition: background-color 0.2s; 
+    
+    &:hover {
+        background-color: rgb(67, 111, 182);
+    }
+`
 

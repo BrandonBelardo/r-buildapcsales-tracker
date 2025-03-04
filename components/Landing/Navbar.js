@@ -48,6 +48,7 @@ const NavContainer = styled.div`
     width: 100%;    
     font-size: 1.2rem;
     box-shadow: 0px 0px 5px 0px rgb(2, 2, 3);
+    z-index: 5; // Fixes elements appearing over navbar
 `;
 
 
