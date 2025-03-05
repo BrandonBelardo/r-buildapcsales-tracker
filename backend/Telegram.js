@@ -2,12 +2,20 @@ import { getUserSetting } from "./Database";
 import { getUsersFromDatabase } from "./Database";
 
 export const notifyUser = async (uid, message) => {
+    const LOCAL = false;
+    let base = "";
+    if (LOCAL) {
+        base = "http://localhost:3000"
+    } else {
+        base = "https://r-buildapcsales-tracker.vercel.app"
+    }
     try {
         const telegramID = await getUserSetting(uid, "telegramID");
         if (!telegramID) {
             throw new Error("Telegram ID was not found.")
         }
-        const response = await fetch('http://localhost:3000/api/telegram/push-notification', {
+
+            const response = await fetch(`${base}/api/telegram/push-notification`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
