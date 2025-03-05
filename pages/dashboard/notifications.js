@@ -7,6 +7,7 @@ import { getUserSetting, setUserSetting } from "@/backend/Database";
 import Tooltip from "@/components/Tooltip";
 import { useRouter } from "next/router";
 import { notifyUser } from "@/backend/Telegram";
+import { escapeMarkdown } from "@/backend/Telegram";
 
 export default function Notifcations() {
 
@@ -94,7 +95,7 @@ export default function Notifcations() {
     };
     
     const testNotification = async () => {
-        notifyUser(user.uid, "If you received this, your Telegram account is properly linked.");
+        notifyUser(user.uid, escapeMarkdown("If you received this, your Telegram account is properly linked."));
     };
 
     return (

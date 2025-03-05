@@ -89,6 +89,6 @@ export const notifyUsersByPreference = async (newPosts) => {
     }
 };
 
-function escapeMarkdown(text) {
+export function escapeMarkdown(text) {
     return text.replace(/([_*\[\]()~`>#+-=|{}.!])/g, '\\$1');
 }
