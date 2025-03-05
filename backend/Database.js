@@ -1,5 +1,4 @@
 import { doc, setDoc, getDoc, updateDoc, getDocs, collection, query, where } from "firebase/firestore"
-import { database } from "./Firebase"
 import { db } from "./Firebase";
 
 export const addUserToFirestore = async (user) => {

@@ -17,25 +17,19 @@ export const getNewPostList = async (newestStoredPostID, posts) => {
 
 export const checkForNewPosts = async () => {
     try {
-        console.log("a");
         const response = await fetch("https://www.reddit.com/r/buildapcsales/new.json");
-        console.log("b");
-        console.log(response);
         const data = await response.json();
-        console.log("c");
         const posts = data.data.children;
-        console.log("d");
 
-        const textData = await response.text(); 
-        console.log("Raw API Response:", textData)
-
-        const newestStoredPostID = await getLatestPostID();
+        // const newestStoredPostID = await getLatestPostID();
+        // FOR TESTING
+        const newestStoredPostID = "1j3lnf7";
 
         const newPosts = await getNewPostList(newestStoredPostID, posts);
 
         if (newPosts.length > 0) {
             console.log(`Found ${newPosts.length} new posts.`);
-            await storeLatestPost(posts);
+            // await storeLatestPost(posts);
             await notifyUsersByPreference(newPosts);
         } else {
             console.log("No new posts since last check.");

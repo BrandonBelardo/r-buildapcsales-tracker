@@ -18,7 +18,8 @@ export default async function handler(req, res) {
                 },
                 body: JSON.stringify({
                     chat_id: telegramID,
-                    text: message
+                    text: message,
+                    "parse_mode": "MarkdownV2"
                 })
             });
 
@@ -34,3 +35,5 @@ export default async function handler(req, res) {
         }
     }
 }
+
+
