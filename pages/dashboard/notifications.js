@@ -36,26 +36,28 @@ export default function Notifcations() {
     useEffect(() => {
         const fetchNotificationSettings = async () => {
             if (!user) return;
+            
+            const uid = user.uid;
 
-            const id = await getUserSetting(user, "telegramID");
+            const id = await getUserSetting(uid, "telegramID");
             if (id) {
                 setTelegramID(id);
                 setTelegramIDInput(id);
             }
 
-            const includeKeywords = await getUserSetting(user, "includeKeywords");
+            const includeKeywords = await getUserSetting(uid, "includeKeywords");
             if (includeKeywords) {
                 setIncludeKeywords(includeKeywords);
                 setIncludeKeywordsInput(includeKeywords);
             }
 
-            const excludeKeywords = await getUserSetting(user, "excludeKeywords");
+            const excludeKeywords = await getUserSetting(uid, "excludeKeywords");
             if (excludeKeywords) {
                 setExcludeKeywords(excludeKeywords);
                 setExcludeKeywordsInput(excludeKeywords);
             }
 
-            const includeTags = await getUserSetting(user, "includeTags");
+            const includeTags = await getUserSetting(uid, "includeTags");
             if (includeTags) {
                 setIncludeTags(includeTags);
                 setIncludeTagsInput(includeTags);
@@ -68,19 +70,21 @@ export default function Notifcations() {
         if (!user || !(telegramIDInput || includeKeywordsInput || excludeKeywordsInput || includeTagsInput)) {
             alert("No fields entered");
         }
+        
+        const uid = user.uid;
 
 
         try {
-            await setUserSetting(user, "telegramID", telegramIDInput);
+            await setUserSetting(uid, "telegramID", telegramIDInput);
             setTelegramID(telegramIDInput);
 
-            await setUserSetting(user, "includeKeywords", includeKeywordsInput);
+            await setUserSetting(uid, "includeKeywords", includeKeywordsInput);
             setIncludeKeywords(telegramIDInput);
 
-            await setUserSetting(user, "excludeKeywords", excludeKeywordsInput);
+            await setUserSetting(uid, "excludeKeywords", excludeKeywordsInput);
             setExcludeKeywords(telegramIDInput);
 
-            await setUserSetting(user, "includeTags", includeTagsInput);
+            await setUserSetting(uid, "includeTags", includeTagsInput);
             setIncludeTags(telegramIDInput);
 
             alert("Settings updated successfully");
@@ -90,7 +94,7 @@ export default function Notifcations() {
     };
     
     const testNotification = async () => {
-        notifyUser(user, "If you received this, your Telegram account is properly linked.");
+        notifyUser(user.uid, "If you received this, your Telegram account is properly linked.");
     };
 
     return (

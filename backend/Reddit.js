@@ -16,29 +16,32 @@ export const getNewPostList = async (newestStoredPostID, posts) => {
 }
 
 export const checkForNewPosts = async () => {
-    if (true) {
-        console.log("Successful trigger!");
-    }
-    else {
-        try {
-            const response = await fetch("https://www.reddit.com/r/buildapcsales/new.json");
-            const data = await response.json();
-            const posts = data.data.children;
+    try {
+        console.log("a");
+        const response = await fetch("https://www.reddit.com/r/buildapcsales/new.json");
+        console.log("b");
+        console.log(response);
+        const data = await response.json();
+        console.log("c");
+        const posts = data.data.children;
+        console.log("d");
 
-            const newestStoredPostID = await getLatestPostID();
+        const textData = await response.text(); 
+        console.log("Raw API Response:", textData)
 
-            const newPosts = await getNewPostList(newestStoredPostID, posts);
+        const newestStoredPostID = await getLatestPostID();
 
-            if (newPosts.length > 0) {
-                console.log(`Found ${newPosts.length} new posts.`);
-                await storeLatestPost(posts);
-                await notifyUsersByPreference(newPosts);
-            } else {
-                console.log("No new posts since last check.");
-            }
-        } catch (error) {
-            console.error("Error checking for new posts:", error);
+        const newPosts = await getNewPostList(newestStoredPostID, posts);
+
+        if (newPosts.length > 0) {
+            console.log(`Found ${newPosts.length} new posts.`);
+            await storeLatestPost(posts);
+            await notifyUsersByPreference(newPosts);
+        } else {
+            console.log("No new posts since last check.");
         }
+    } catch (error) {
+        console.error("Error checking for new posts:", error);
     }
 };
 

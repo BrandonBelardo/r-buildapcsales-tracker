@@ -23,12 +23,9 @@ export const addUserToFirestore = async (user) => {
     }
 }
 
-export const setUserSetting = async (user, columnName, columnValue) => {
+export const setUserSetting = async (uid, columnName, columnValue) => {
     try {
-        if (!user) {
-            throw new Error("Provided user is not yet intialized");
-        }
-        const userRef = doc(db, "users", user.uid);
+        const userRef = doc(db, "users", uid);
         await updateDoc(userRef, {
             [columnName]: columnValue,
         });
@@ -38,13 +35,13 @@ export const setUserSetting = async (user, columnName, columnValue) => {
 
 }
 
-export const getUserSetting = async (user, columnName) => {
+export const getUserSetting = async (uid, columnName) => {
     try {
-        if (!user || !user.uid) {
+        if (!uid) {
             throw new Error("Provided user is not yet initialized");
         }
 
-        const userRef = doc(db, "users", user.uid);
+        const userRef = doc(db, "users", uid);
         const userSnap = await getDoc(userRef);
 
         if (userSnap.exists() && userSnap.data()[columnName]) {
@@ -61,9 +58,9 @@ export const getUserSetting = async (user, columnName) => {
 export const getLatestPostID = async () => {
     try {
         const postRef = doc(db, "post_data", "last_post");
-        const postSnap = await getDoc(userRef);
+        const postSnap = await getDoc(postRef);
 
-        if (userSnap.exists()) {
+        if (postSnap.exists()) {
             return postSnap.data().postID;
         }
         else {
@@ -103,4 +100,21 @@ export const storeLatestPost = async (posts) => {
         return null;
     }
 };
+
+export async function getUsersFromDatabase() {
+    try {
+        const usersRef = collection(db, "users");
+        const snapshot = await getDocs(usersRef);
+        const users = [];
+        snapshot.forEach(doc => {
+            const user = doc.data();
+            users.push(user);
+        });
+        return users;
+    } catch (error) {
+        console.error("Error fetching users from Firestore: ", error);
+        return [];
+    }
+}
+
 
