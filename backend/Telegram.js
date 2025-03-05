@@ -71,7 +71,7 @@ export const notifyUsersByPreference = async (newPosts) => {
         }
 
         if (matchedPosts.length > 0) {
-            const message = matchedPosts.map(post => `*${escapeMarkdown(post.data.title)}*\n [View Deal](${post.data.url})`).join("\n\n");
+            const message = matchedPosts.map(post => `*${escapeMarkdown(post.data.title)}*\n[View Deal](${post.data.url})\t\t[View Reddit Page](https://www.reddit.com${post.data.permalink})`).join("\n\n");
             await notifyUser(uid, message);
             console.log(`TelegramID of user with preferences found is ${telegramID}`)
             console.log(`Sent notification to ${uid} (${telegramID})`);
