@@ -16,26 +16,56 @@ export const getNewPostList = async (newestStoredPostID, posts) => {
 }
 
 export const checkForNewPosts = async () => {
-    try {
-        const response = await fetch("https://www.reddit.com/r/buildapcsales/new.json");
-        const data = await response.json();
-        const posts = data.data.children;
+    const DEMO = true;
+    /*
+        In demo mode, we manually set the most recently stored post id so that
+        the notification function can be demonstrated without the need to wait for
+        actual new posts
+        
+        In production mode (set DEMO = false), the function will automatically
+        store and retrieve the most recent post found after each call to the
+        function
+    */
+    if (DEMO) {
+        try {
+            const response = await fetch("https://www.reddit.com/r/buildapcsales/new.json");
+            const data = await response.json();
+            const posts = data.data.children;
 
-        // const newestStoredPostID = await getLatestPostID();
-        // FOR TESTING
-        const newestStoredPostID = "1j3lnf7";
+            // Manually choose a recent post id from https://www.reddit.com/r/buildapcsales/new.json
+            const newestStoredPostID = "1j3lnf7";
 
-        const newPosts = await getNewPostList(newestStoredPostID, posts);
+            const newPosts = await getNewPostList(newestStoredPostID, posts);
 
-        if (newPosts.length > 0) {
-            console.log(`Found ${newPosts.length} new posts.`);
-            // await storeLatestPost(posts);
-            await notifyUsersByPreference(newPosts);
-        } else {
-            console.log("No new posts since last check.");
+            if (newPosts.length > 0) {
+                console.log(`Found ${newPosts.length} new posts.`);
+                await notifyUsersByPreference(newPosts);
+            } else {
+                console.log("No new posts since last check.");
+            }
+        } catch (error) {
+            console.error("Error checking for new posts:", error);
         }
-    } catch (error) {
-        console.error("Error checking for new posts:", error);
+    } else {
+        try {
+            const response = await fetch("https://www.reddit.com/r/buildapcsales/new.json");
+            const data = await response.json();
+            const posts = data.data.children;
+
+            const newestStoredPostID = await getLatestPostID();
+
+            const newPosts = await getNewPostList(newestStoredPostID, posts);
+
+            if (newPosts.length > 0) {
+                console.log(`Found ${newPosts.length} new posts.`);
+                await storeLatestPost(posts);
+                await notifyUsersByPreference(newPosts);
+            } else {
+                console.log("No new posts since last check.");
+            }
+        } catch (error) {
+            console.error("Error checking for new posts:", error);
+        }
     }
 };
 
