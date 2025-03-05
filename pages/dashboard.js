@@ -25,7 +25,6 @@ export default function Dashboard() {
             .then((res) => res.json())
             .then((data) => {
                 setPosts(data.data.children); 
-                storeLatestPost(data.data.children); 
             })
             .catch((error) => console.error("Error fetching Reddit posts:", error));
     }, []);
