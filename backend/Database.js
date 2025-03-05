@@ -48,15 +48,31 @@ export const getUserSetting = async (user, columnName) => {
         const userSnap = await getDoc(userRef);
 
         if (userSnap.exists() && userSnap.data()[columnName]) {
-            return userSnap.data()[columnName]; 
+            return userSnap.data()[columnName];
         } else {
-            return ""; 
+            return "";
         }
     } catch (error) {
         console.error(`Error fetching ${columnName}: ${error}`);
-        return ""; 
+        return "";
     }
 };
+
+export const getLatestPostID = async () => {
+    try {
+        const postRef = doc(db, "post_data", "last_post");
+        const postSnap = await getDoc(userRef);
+
+        if (userSnap.exists()) {
+            return postSnap.data().postID;
+        }
+        else {
+            throw new Error("No recent post found");
+        }
+    } catch (error) {
+        console.error("Error fetching lastest post id: ", error);
+    }
+}
 
 export const storeLatestPost = async (posts) => {
     try {
@@ -64,13 +80,13 @@ export const storeLatestPost = async (posts) => {
             return null;
         }
 
-        const latestPost = posts[0].data; 
+        const latestPost = posts[0].data;
 
         const storedLastPostRef = doc(db, "post_data", "last_post");
-        const storedLastPost = await getDoc(storedLastPostRef);
+        const storedLastPostSnap = await getDoc(storedLastPostRef);
 
-        if (storedLastPost.exists() && storedLastPost.data().postID === latestPost.id) {
-            return null; 
+        if (storedLastPostSnap.exists() && storedLastPostSnap.data().postID === latestPost.id) {
+            return null;
         }
 
         await setDoc(storedLastPostRef, {
@@ -87,3 +103,4 @@ export const storeLatestPost = async (posts) => {
         return null;
     }
 };
+

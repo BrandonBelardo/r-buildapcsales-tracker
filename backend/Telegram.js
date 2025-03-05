@@ -24,3 +24,7 @@ export const notifyUser = async (user, message) => {
         console.error("Error notifying user: ", error.message);
     }
 }
+
+export const notifyUsersByPreference = async (newPosts) => {
+    
+}
