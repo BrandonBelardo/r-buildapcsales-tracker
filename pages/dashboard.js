@@ -33,8 +33,10 @@ export default function Dashboard() {
         <>
             <Navbar />
             <TitleContainer>
+                <TitleDiv>
                 <h1>r/buildapcsales - Recent Deals</h1>
                 <h3>Configure Notifications with Telegram:</h3>
+                </TitleDiv>
                 <ConfigureContainter>
                     <ConfigureButton href="/dashboard/notifications">
                     <TelegramIcon/>
@@ -59,6 +61,15 @@ export default function Dashboard() {
     );
 }
 
+const TitleDiv = styled.div`
+    letter-spacing: 0.02em;
+    border-radius: 16px;
+    padding: 10px 10px;
+    box-shadow: 0px 0px 10px rgb(213, 193, 239);
+    width: 600px;
+    background-color: #201d24;
+    `
+
 const CenterDiv = styled.div`
     display: flex;
     align-items: center;
@@ -69,6 +80,9 @@ const TitleContainer = styled.div`
     margin-top: 100px;
     text-align: center;
     margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 `
 
 const PostsContainer = styled.ul`
@@ -115,7 +129,7 @@ const ConfigureButton = styled(Link)`
     gap: 8px; 
     background-color: #179cde;
     padding: 0.5rem 0.875rem;
-    margin: 1rem;
+    margin: 2rem;
     font-weight: 750;
     font-size: 1.1rem;
     border: none;

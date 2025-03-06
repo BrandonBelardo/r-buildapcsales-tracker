@@ -2,7 +2,7 @@ import { getUserSetting } from "./Database";
 import { getUsersFromDatabase } from "./Database";
 
 export const notifyUser = async (uid, message) => {
-    const LOCAL = false;
+    const LOCAL = true;
     let base = "";
     if (LOCAL) {
         base = "http://localhost:3000"
