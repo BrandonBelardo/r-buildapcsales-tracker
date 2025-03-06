@@ -29,8 +29,16 @@ export const checkForNewPosts = async () => {
     if (DEMO) {
         try {
             const response = await fetch("https://www.reddit.com/r/buildapcsales/new.json");
+
+            console.log("Response Status:", response.status);
+            console.log("Response Headers:", response.headers);
+
+            const text = await response.text();
+            console.log("Raw Response Body:", text); // Print the full response as text
             const data = await response.json();
             const posts = data.data.children;
+            
+            console.log(d)
 
             // Manually choose a recent post id from https://www.reddit.com/r/buildapcsales/new.json
             const newestStoredPostID = "1j3lnf7";
