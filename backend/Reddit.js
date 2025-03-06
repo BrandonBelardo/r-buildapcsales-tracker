@@ -30,10 +30,22 @@ export const checkForNewPosts = async () => {
         try {
             const response = await fetch("https://www.reddit.com/r/buildapcsales/new.json", {
                 headers: {
-                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+                    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                    "Accept-Encoding": "gzip, deflate, br, zstd",
+                    "Accept-Language": "en-US,en;q=0.5",
+                    "Connection": "keep-alive",
+                    "Host": "www.reddit.com",
+                    "Priority": "u=0, i",
+                    "Sec-Fetch-Dest": "document",
+                    "Sec-Fetch-Mode": "navigate",
+                    "Sec-Fetch-Site": "none",
+                    "Sec-Fetch-User": "?1",
+                    "TE": "trailers",
+                    "Upgrade-Insecure-Requests": "1",
+                    "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:136.0) Gecko/20100101 Firefox/136.0"
                 }
             });
-
+            
             console.log("Response Status:", response.status);
             console.log("Response Headers:", response.headers);
 
