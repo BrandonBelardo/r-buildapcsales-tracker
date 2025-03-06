@@ -34,6 +34,8 @@ export default function Notifcations() {
         }
     }, []);
 
+
+    // This will autofill in the form if the user has preferenced already saved on their account
     useEffect(() => {
         const fetchNotificationSettings = async () => {
             if (!user) return;

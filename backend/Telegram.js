@@ -46,7 +46,8 @@ export const notifyUsersByPreference = async (newPosts) => {
         }
 
         let includeKeywordsList = [], excludeKeywordsList = [], includeTagsList = [];
-
+        
+        // Get keywords by comma-separation
         if (includeKeywords) {
             includeKeywordsList = includeKeywords.toLowerCase().split(",").map(keyword => keyword.trim());
         }
@@ -62,6 +63,9 @@ export const notifyUsersByPreference = async (newPosts) => {
         for (const post of newPosts) {
             const title = post.data.title.toLowerCase();
             const tag = post.data.link_flair_text.toLowerCase();
+            
+            // These are conditions given by the user's stored preferences that determines if the notification is sent out
+            // If the code skips all of these, the notification is sent
 
             if (includeKeywordsList.length > 0 && !includeKeywordsList.some(keyword => title.includes(keyword))) {
                 continue;
@@ -90,5 +94,7 @@ export const notifyUsersByPreference = async (newPosts) => {
 };
 
 export function escapeMarkdown(text) {
+    // Telegram api message needs to be markdown compatible,
+    // so we use regex to replace reserved markdown characters
     return text.replace(/([_*\[\]()~`>#+-=|{}.!])/g, '\\$1');
 }

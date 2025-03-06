@@ -1,6 +1,8 @@
 import { doc, setDoc, getDoc, updateDoc, getDocs, collection, query, where } from "firebase/firestore"
 import { db } from "./Firebase";
 
+// Firebase uses references and snapshots to manipulate database data
+
 export const addUserToFirestore = async (user) => {
     try {
         if (!user) {
