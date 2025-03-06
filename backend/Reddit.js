@@ -29,9 +29,6 @@ export const checkForNewPosts = async () => {
     if (DEMO) {
         try {
             const response = await fetch("https://www.reddit.com/r/buildapcsales/new.json", {
-                headers: {
-                    "User-Agent": "MyApp/1.0 by MyRedditUsername"
-                }
             });
             
             console.log("Response Status:", response.status);

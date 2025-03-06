@@ -4,8 +4,10 @@ import styled from "styled-components";
 import Link from "next/link";
 import dashboard_image from 'assets/notification.png';
 import Image from 'next/image';
+import { useStateContext } from "@/context/StateContext";
 
 export default function Home() {
+    const { user } = useStateContext();
     return (
         <>
             <Navbar />
@@ -17,14 +19,16 @@ export default function Home() {
                     <MainSubHeader>
                         Configure notifications with Telegram to be instantly alerted of new sales.
                     </MainSubHeader>
-                    <GetStartedButton href="/account/signup">Get Started</GetStartedButton>
+                    {user ?
+                        <GetStartedButton href="/dashboard">Get Started</GetStartedButton> :
+                        <GetStartedButton href="/account/signup">Get Started</GetStartedButton>}
                 </LandingTextContainer>
                 <ImageContainer>
-                    <StyledImage src={dashboard_image} alt="dashboard image"></StyledImage>        
+                    <StyledImage src={dashboard_image} alt="dashboard image"></StyledImage>
                 </ImageContainer>
-                
+
             </PageContainer>
-            
+
         </>
     );
 }
